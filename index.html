@@ -78,11 +78,13 @@
         h1 {
             text-align: center;
             color: #667eea;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
             text-shadow: 0 0 20px rgba(102, 126, 234, 0.7);
             letter-spacing: 2px;
         }
+        
+
 
         .subtitle {
             text-align: center;
@@ -137,6 +139,74 @@
         #search-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        /* 下载按钮样式 */
+        .download-btn {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 8px;
+        }
+
+        /* 上传按钮样式 */
+        .upload-btn {
+            display: inline-block;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 8px;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        /* 上传状态样式 */
+        .upload-status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .upload-success {
+            background: rgba(72, 187, 120, 0.2);
+            color: #48bb78;
+            border: 1px solid rgba(72, 187, 120, 0.5);
+        }
+
+        .upload-error {
+            background: rgba(245, 101, 101, 0.2);
+            color: #f56565;
+            border: 1px solid rgba(245, 101, 101, 0.5);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+            background: linear-gradient(135deg, #38a169, #2f855a);
         }
 
         /* 分类标签样式 */
@@ -323,7 +393,29 @@
     <header>
         <div class="container">
             <h1>🚀 初中数学动态交互课件</h1>
-            <p class="subtitle">探索元宇宙中的数学奥秘，让学习更炫酷</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <div style="margin-bottom: 15px;">
+                    用交互式动态课件探究数学知识让学习更炫酷 &nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                </div>
+                <div>
+                    <a href="用HTML制作动态交互初中数学课件指南.docx" class="download-btn" download="初中数学课件制作指南.docx">
+                        📥 课件制作指南
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="课件统计表格.xlsx" class="download-btn" download="初中数学课件统计表格.xlsx">
+                        📥 课件统计表
+                    </a>
+                    <a href="网页画板.html" class="download-btn" target="_blank">
+                        🎨 网页画板
+                    </a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="upload-btn" onclick="document.getElementById('file-input').click()">
+                        📤 上传课件
+                    </button>
+                </div>
+                <input type="file" id="file-input" style="display: none;" accept=".html,.htm" multiple>
+            </div>
         </div>
     </header>
 
@@ -337,14 +429,15 @@
 
             <!-- 分类标签 -->
             <div class="categories">
-                <button class="category-btn active" data-category="all">全部课件</button>
-                <button class="category-btn" data-category="七年级上册">七年级上册</button>
-                <button class="category-btn" data-category="七年级下册">七年级下册</button>
-                <button class="category-btn" data-category="八年级上册">八年级上册</button>
-                <button class="category-btn" data-category="八年级下册">八年级下册</button>
-                <button class="category-btn" data-category="九年级上册">九年级上册</button>
-                <button class="category-btn" data-category="九年级下册">九年级下册</button>
-            </div>
+            <button class="category-btn active" data-category="all">全部课件</button>
+            <button class="category-btn" data-category="七年级上册">七年级上册</button>
+            <button class="category-btn" data-category="七年级下册">七年级下册</button>
+            <button class="category-btn" data-category="八年级上册">八年级上册</button>
+            <button class="category-btn" data-category="八年级下册">八年级下册</button>
+            <button class="category-btn" data-category="九年级上册">九年级上册</button>
+            <button class="category-btn" data-category="九年级下册">九年级下册</button>
+            <button class="category-btn" data-category="中考复习">中考复习</button>
+        </div>
 
             <!-- 课件卡片网格 -->
             <div class="courses-grid" id="courses-grid">
@@ -381,8 +474,64 @@
         // 课件数据
         const courses = [
             {
+                id: 45,
+                title: "九年级下册第三章探究圆的切线的性质定理",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "郭娜",
+                file: "九年级下册第三章探究圆的切线的性质定理（郭娜）.HTML"
+            },
+            {
+                id: 46,
+                title: "中考复习2025年陕西中考数学第14题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2025年陕西中考数学第14题（雷新风）.html"
+            },
+            {
+                id: 47,
+                title: "中考复习2024年陕西中考数学第13题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2024年陕西中考数学第13题（雷新风）.html"
+            },
+            {
+                id: 48,
+                title: "中考复习2021年陕西中考数学第13题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2021年陕西中考数学第13题（雷新风）.html"
+            },
+            {
+                id: 49,
+                title: "中考复习2023年陕西中考数学第13题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2023年陕西中考数学第13题（雷新风）.html"
+            },
+            {
+                id: 50,
+                title: "中考复习2022年陕西中考数学第13题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2022年陕西中考数学第13题（雷新风）.html"
+            },
+            {
+                id: 51,
+                title: "中考复习2022陕西中考数学副题13题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2022陕西中考数学副题13题（雷新风）.html"
+            },
+            {
                 id: 1,
-                title: "正方体截面动态演示",
+                title: "七年级上册第一章正方体截面动态演示",
                 description: "七年级上册第一章",
                 category: "七年级上册",
                 author: "雷新风",
@@ -390,211 +539,347 @@
             },
             {
                 id: 2,
-                title: "线段运动演示",
-                description: "七年级数学",
-                category: "七年级下册",
-                author: "袁媛",
-                file: "七年级数学 - 线段运动演示（袁媛）.html"
+                title: "七年级上册第三章同类项消消乐",
+                description: "七年级上册第三章",
+                category: "七年级上册",
+                author: "陈依群",
+                file: "七年级上册第三章同类项消消乐(陈依群）.HTML"
             },
             {
                 id: 3,
-                title: "角的和差课本习题",
-                description: "七年级数学上册",
+                title: "七年级上册第三章识别同类项",
+                description: "七年级上册第三章",
                 category: "七年级上册",
-                author: "黄权锋",
-                file: "七年级数学上册角的和差课本习题（黄权锋）.html"
+                author: "李娟茹",
+                file: "七年级上册第三章识别同类项（李娟茹）.html"
             },
             {
                 id: 4,
-                title: "二元一次方程组与一次函数应用",
-                description: "八年级上册",
-                category: "八年级上册",
-                author: "林鹏程",
-                file: "八年级上册 二元一次方程组与一次函数应用（林鹏程）.html"
+                title: "七年级上册第二章相反数消消乐",
+                description: "七年级上册第二章",
+                category: "七年级上册",
+                author: "袁媛",
+                file: "七年级上册第二章相反数消消乐 （袁媛）.HTML"
             },
             {
                 id: 5,
-                title: "k，b值对一次函数图象的影响",
-                description: "八年级上册",
-                category: "八年级上册",
-                author: "张梦婕",
-                file: "八年级上册一次函数中k，b值对一次函数图象的影响（张梦婕）.html"
+                title: "七年级上册第四章线段运动演示",
+                description: "七年级上册第四章",
+                category: "七年级上册",
+                author: "袁媛",
+                file: "七年级上册第四章线段运动演示（袁媛）.html"
             },
             {
                 id: 6,
-                title: "二元一次方程与一次函数",
-                description: "八年级上册",
-                category: "八年级上册",
-                author: "陈依群",
-                file: "八年级上册二元一次方程与一次函数（陈依群）.html"
+                title: "七年级上册第四章角的和差课本习题",
+                description: "七年级上册第四章",
+                category: "七年级上册",
+                author: "黄权锋",
+                file: "七年级上册第四章角的和差课本习题（黄权锋）.html"
             },
             {
                 id: 7,
-                title: "二元一次方程组与一次函数图象交点的关系",
-                description: "八年级上册",
-                category: "八年级上册",
-                author: "张梦婕",
-                file: "八年级上册二元一次方程组与一次函数图象交点的关系（张梦婕）.html"
+                title: "七年级下册第二章平行线性质定理",
+                description: "七年级下册第二章",
+                category: "七年级下册",
+                author: "郭娜",
+                file: "七年级下册第二章平行线性质定理(郭娜).html"
             },
             {
                 id: 8,
-                title: "加权平均数",
-                description: "八年级上册",
-                category: "八年级上册",
-                author: "康娟呢",
-                file: "八年级上册加权平均数（康娟呢）.html"
+                title: "七年级下册第五章将军饮马动态演示课件",
+                description: "七年级下册第五章",
+                category: "七年级下册",
+                author: "赫林娟",
+                file: "七年级下册第五章将军饮马动态演示课件（赫林娟）.html"
             },
             {
                 id: 9,
-                title: "反比例函数",
-                description: "九年级上册",
-                category: "九年级上册",
-                author: "康娟妮",
-                file: "九年级上册反比例函数（康娟妮）.html"
+                title: "八年级上册第二章无理数在数轴上表示",
+                description: "八年级上册第二章",
+                category: "八年级上册",
+                author: "黄权锋",
+                file: "八年级上册第二章无理数在数轴上表示（黄权锋）.html"
             },
             {
                 id: 10,
-                title: "二次函数闯关对战",
-                description: "九年级下册2.1",
-                category: "九年级下册",
-                author: "李娟茹",
-                file: "九年级下册2.1二次函数闯关对战(李娟茹).html"
+                title: "八年级上册第五章二元一次方程与一次函数",
+                description: "八年级上册第五章",
+                category: "八年级上册",
+                author: "陈依群",
+                file: "八年级上册第五章二元一次方程与一次函数（陈依群）.html"
             },
             {
                 id: 11,
-                title: "二次函数篮球投篮动画",
-                description: "九年级下册",
-                category: "九年级下册",
-                author: "雷新风",
-                file: "九年级下册二次函数篮球投篮动画.html"
+                title: "八年级上册第五章二元一次方程组与一次函数图象交点的关系",
+                description: "八年级上册第五章",
+                category: "八年级上册",
+                author: "张梦婕",
+                file: "八年级上册第五章二元一次方程组与一次函数图象交点的关系（张梦婕）.html"
             },
             {
                 id: 12,
-                title: "二次函数",
-                description: "九年级下册",
-                category: "九年级下册",
-                author: "康娟妮",
-                file: "九年级下册二次函数（康娟妮）.html"
+                title: "八年级上册第五章二元一次方程组与一次函数应用",
+                description: "八年级上册第五章",
+                category: "八年级上册",
+                author: "林鹏程",
+                file: "八年级上册第五章二元一次方程组与一次函数应用（林鹏程）.html"
             },
             {
                 id: 13,
-                title: "定边定角隐形圆动态演示（60°）",
-                description: "九年级下册",
-                category: "九年级下册",
-                author: "曹甲",
-                file: "九年级下册定边定角隐形圆（曹甲）.html"
+                title: "八年级上册第六章加权平均数",
+                description: "八年级上册第六章",
+                category: "八年级上册",
+                author: "康娟呢",
+                file: "八年级上册第六章加权平均数（康娟呢）.html"
             },
             {
                 id: 14,
-                title: "三角函数特殊值消消乐",
+                title: "八年级上册第四章一次函数中k，b值对一次函数图象的影响",
+                description: "八年级上册第四章",
+                category: "八年级上册",
+                author: "张梦婕",
+                file: "八年级上册第四章一次函数中k，b值对一次函数图象的影响（张梦婕）.html"
+            },
+            {
+                id: 15,
+                title: "九年级上册第一章菱形性质探究",
+                description: "九年级上册第一章",
+                category: "九年级上册",
+                author: "郭娜",
+                file: "九年级上册第一章菱形性质探究（郭娜）.html"
+            },
+            {
+                id: 16,
+                title: "九年级上册第六章反比例函数K的几何意义",
+                description: "九年级上册第六章",
+                category: "九年级上册",
+                author: "康娟妮",
+                file: "九年级上册第六章反比例函数K的几何意义（康娟妮）.html"
+            },
+            {
+                id: 17,
+                title: "九年级上册第四章平行线分线段成比例",
+                description: "九年级上册第四章",
+                category: "九年级上册",
+                author: "李亚萍",
+                file: "九年级上册第四章平行线分线段成比例（李亚萍）.HTML"
+            },
+            {
+                id: 18,
+                title: "九年级下册第一章三角函数特殊值消消乐",
                 description: "九年级下册第一章",
                 category: "九年级下册",
                 author: "李娟茹",
                 file: "九年级下册第一章三角函数特殊值消消乐（李娟茹）.html"
             },
             {
-                id: 15,
-                title: "特殊角三角函数闯关训练",
+                id: 19,
+                title: "九年级下册第一章特殊角三角函数闯关训练",
                 description: "九年级下册第一章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第一章特殊角三角函数闯关训练-（雷新风）.html"
             },
             {
-                id: 16,
-                title: "锐角三角函数速查",
+                id: 20,
+                title: "九年级下册第一章锐角三角函数速查",
                 description: "九年级下册第一章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第一章锐角三角函数速查（雷新风）.html"
             },
             {
-                id: 17,
-                title: "圆的生成过程",
+                id: 21,
+                title: "九年级下册第三章圆周角定理",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "牟艳艳",
+                file: "九年级下册第三章圆周角定理(牟艳艳).html"
+            },
+            {
+                id: 22,
+                title: "九年级下册第三章圆周角定理及其推论",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "康娟妮",
+                file: "九年级下册第三章圆周角定理及其推论（康娟妮）.html"
+            },
+            {
+                id: 23,
+                title: "九年级下册第三章圆定边定角隐形圆",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "曹甲",
+                file: "九年级下册第三章圆定边定角隐形圆(曹甲).HTML"
+            },
+            {
+                id: 24,
+                title: "九年级下册第三章圆心角性质定理",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "雷新风",
+                file: "九年级下册第三章圆心角性质定理（雷新风）.HTML"
+            },
+            {
+                id: 25,
+                title: "九年级下册第三章圆的对称性",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "雷新风",
+                file: "九年级下册第三章圆的对称性（雷新风）.HTML"
+            },
+            {
+                id: 26,
+                title: "九年级下册第三章圆的生成过程",
                 description: "九年级下册第三章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第三章圆的生成过程（雷新风）.html"
             },
             {
-                id: 18,
-                title: "圆的相关概念",
+                id: 27,
+                title: "九年级下册第三章圆的相关概念",
                 description: "九年级下册第三章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第三章圆的相关概念（雷新风）.html"
             },
             {
-                id: 19,
-                title: "点和圆的位置关系",
+                id: 28,
+                title: "九年级下册第三章点和圆的位置关系",
                 description: "九年级下册第三章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第三章点和圆的位置关系（雷新风）.html"
             },
             {
-                id: 20,
-                title: "二次函数y=x^2的图像",
+                id: 29,
+                title: "九年级下册第三章三角形外接圆制作过程",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "李娟茹",
+                file: "九年级下册第三章三角形外接圆制作过程(李娟茹).html"
+            },
+            {
+                id: 30,
+                title: "九年级下册第三章定边定角隐形圆",
+                description: "九年级下册第三章",
+                category: "九年级下册",
+                author: "曹甲",
+                file: "九年级下册第三章定边定角隐形圆（曹甲）.html"
+            },
+            {
+                id: 31,
+                title: "九年级下册第二章二次函数y=x^2的图像",
                 description: "九年级下册第二章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第二章二次函数y=x^2的图像（雷新风）.html"
             },
             {
-                id: 21,
-                title: "二次函数各项系数对抛物线的影响",
+                id: 32,
+                title: "九年级下册第二章二次函数各项系数对抛物线的影响",
                 description: "九年级下册第二章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第二章二次函数各项系数对抛物线的影响（雷新风）.html"
             },
             {
-                id: 22,
-                title: "二次函数图象性质",
-                description: "九年级数学下册",
+                id: 33,
+                title: "九年级下册第二章二次函数图象性质",
+                description: "九年级下册第二章",
                 category: "九年级下册",
                 author: "牟艳艳",
-                file: "九年级数学下册二次函数图象性质（某艳艳）.html"
+                file: "九年级下册第二章二次函数图象性质（牟艳艳）.html"
             },
             {
-                id: 23,
-                title: "2022陕西中考副题13题",
-                description: "中考复习",
+                id: 34,
+                title: "九年级下册第二章二次函数篮球投篮动画",
+                description: "九年级下册第二章",
                 category: "九年级下册",
                 author: "雷新风",
-                file: "2022陕西中考副题13题（雷新风).html"
+                file: "九年级下册第二章二次函数篮球投篮动画.html"
             },
             {
-                id: 24,
-                title: "七年级上册同类项消消乐",
-                description: "七年级上册",
-                category: "七年级上册",
-                author: "陈依群",
-                file: "七年级上册同类项消消乐(陈依群）.HTML"
+                id: 35,
+                title: "九年级下册第二章二次函数闯关对战",
+                description: "九年级下册第二章",
+                category: "九年级下册",
+                author: "李娟茹",
+                file: "九年级下册第二章二次函数闯关对战(李娟茹).html"
             },
             {
-                id: 25,
-                title: "七年级上册有理数相反数消消乐",
-                description: "七年级上册",
-                category: "七年级上册",
-                author: "袁媛",
-                file: "七年级上册有理数相反数消消乐 （袁媛）.html"
-            },
-            {
-                id: 26,
-                title: "七年级上册相反数消消乐",
-                description: "七年级上册",
-                category: "七年级上册",
-                author: "袁媛",
-                file: "七年级上册相反数消消乐 （袁媛）.HTML"
-            },
-            {
-                id: 27,
-                title: "二次函数顶点式ahk对抛物线的影响",
+                id: 36,
+                title: "九年级下册第二章二次函数顶点式ahk对抛物线的影响",
                 description: "九年级下册第二章",
                 category: "九年级下册",
                 author: "雷新风",
                 file: "九年级下册第二章二次函数顶点式ahk对抛物线的影响（雷新风）.html"
+            },
+            {
+                id: 37,
+                title: "九年级下册第二章二次函数",
+                description: "九年级下册第二章",
+                category: "九年级下册",
+                author: "康娟妮",
+                file: "九年级下册第二章二次函数（康娟妮）.html"
+            },
+            {
+                id: 38,
+                title: "中考复习2022陕西中考副题13题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习2022陕西中考副题13题（雷新风).html"
+            },
+            {
+                id: 39,
+                title: "中考复习将军饮马原理讲解",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习将军饮马原理讲解（雷新风）.html"
+            },
+            {
+                id: 40,
+                title: "中考复习旋转法求最值",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习旋转法求最值（雷新风）.html"
+            },
+            {
+                id: 41,
+                title: "中考复习点圆最值",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习点圆最值（雷新风）.html"
+            },
+            {
+                id: 42,
+                title: "中考复习线圆最值问题",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习线圆最值问题（雷新风）.html"
+            },
+            {
+                id: 43,
+                title: "中考复习远端构造相似三角形",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习远端构造相似（雷新风）.html"
+            },
+            {
+                id: 44,
+                title: "中考复习矩形双动点面积函数图像演示",
+                description: "中考复习",
+                category: "中考复习",
+                author: "雷新风",
+                file: "中考复习矩形双动点面积问题(（雷新风）.html"
             }
         ];
 
@@ -675,6 +960,245 @@
                 const category = btn.dataset.category;
                 filterByCategory(category);
             });
+        });
+
+        // 文件上传功能
+        const fileInput = document.getElementById('file-input');
+        let uploadStatusDiv = null;
+
+        // 创建上传状态显示区域
+        function createUploadStatus() {
+            if (!uploadStatusDiv) {
+                uploadStatusDiv = document.createElement('div');
+                uploadStatusDiv.className = 'upload-status';
+                const headerDiv = document.querySelector('header .container > div:last-child');
+                headerDiv.parentNode.insertBefore(uploadStatusDiv, headerDiv.nextSibling);
+            }
+            return uploadStatusDiv;
+        }
+
+        // 显示上传状态
+        function showUploadStatus(message, isSuccess = true) {
+            const statusDiv = createUploadStatus();
+            statusDiv.textContent = message;
+            statusDiv.className = `upload-status ${isSuccess ? 'upload-success' : 'upload-error'}`;
+            statusDiv.style.display = 'block';
+            
+            // 3秒后自动隐藏
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // 真正保存文件到本地目录
+        function saveFileToServer(filename, content) {
+            // 通过HTTP请求保存文件到服务器
+            return fetch('http://localhost:8080/upload', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    filename: filename,
+                    content: content
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    console.log(`文件已保存到: ${result.path}`);
+                    return true;
+                } else {
+                    console.error('保存文件失败:', result.error);
+                    return false;
+                }
+            })
+            .catch(error => {
+                console.error('保存文件时出错:', error);
+                return false;
+            });
+        }
+
+        function saveFileToLocal(filename, content) {
+            // 创建 Blob 对象
+            const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            // 创建下载链接
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `uploads/${filename}`;
+            document.body.appendChild(a);
+            a.click();
+            
+            // 清理
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+            
+            return true;
+        }
+
+        async function handleFileUpload(event) {
+            const files = Array.from(event.target.files);
+            const fileInput = document.getElementById('file-input');
+            
+            if (files.length === 0) return;
+            
+            let uploadedCount = 0;
+            let savedCount = 0;
+            
+            showUploadStatus('开始处理文件...', 'info');
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (!file.type.match(/text\/html/)) {
+                    showUploadStatus(`❌ ${file.name} 不是有效的HTML文件`, 'error');
+                    uploadedCount++;
+                    continue;
+                }
+                
+                try {
+                    const content = await readFileAsText(file);
+                    
+                    // 生成唯一文件名
+                    const timestamp = Date.now();
+                    const randomSuffix = Math.random().toString(36).substr(-6);
+                    const uniqueFilename = `${timestamp}_${randomSuffix}_${file.name}`;
+                    
+                    // 尝试保存到服务器
+                    let saved = false;
+                    try {
+                        saved = await saveFileToServer(uniqueFilename, content);
+                    } catch (serverError) {
+                        console.log('服务器保存失败，使用本地下载:', serverError);
+                    }
+                    
+                    // 如果服务器保存失败，使用本地下载
+                    if (!saved) {
+                        saved = saveFileToLocal(uniqueFilename, content);
+                    }
+                    
+                    if (saved) {
+                        savedCount++;
+                        
+                        // 解析HTML内容
+                        const courseInfo = parseHTMLContent(content, file.name);
+                        
+                        // 创建新的课程对象
+                        const newCourse = {
+                            id: courses.length + i + 1,
+                            title: courseInfo.title,
+                            description: courseInfo.category,
+                            category: courseInfo.category,
+                            author: courseInfo.author,
+                            filename: uniqueFilename,
+                            fileContent: content,
+                            uploadedAt: new Date().toLocaleString()
+                        };
+                        
+                        // 检查是否已存在相同标题的课程
+                        const existingIndex = courses.findIndex(course => course.title === courseInfo.title);
+                        if (existingIndex !== -1) {
+                            courses[existingIndex] = newCourse;
+                            showUploadStatus(`📝 ${courseInfo.title} 已更新`, 'success');
+                        } else {
+                            courses.push(newCourse);
+                            showUploadStatus(`✅ ${courseInfo.title} 已添加`, 'success');
+                        }
+                    }
+                    
+                } catch (error) {
+                    showUploadStatus(`❌ 处理 ${file.name} 时出错: ${error.message}`, 'error');
+                }
+                
+                uploadedCount++;
+                
+                // 所有文件处理完成后重新渲染
+                if (uploadedCount === files.length) {
+                    renderCourses();
+                    fileInput.value = ''; // 清空文件输入
+                    
+                    setTimeout(() => {
+                        if (savedCount > 0) {
+                            showUploadStatus(`🎉 成功上传 ${savedCount} 个课件！文件已保存到uploads目录`, 'success');
+                        } else {
+                            showUploadStatus('⚠️ 文件处理完成，但保存可能失败', 'warning');
+                        }
+                    }, 500);
+                }
+            }
+        }
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = e => reject(e);
+                reader.readAsText(file, 'UTF-8');
+            });
+        }
+
+        function parseHTMLContent(content, filename) {
+            try {
+                // 解析HTML内容
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(content, 'text/html');
+                
+                // 提取标题
+                let title = doc.querySelector('h1')?.textContent || filename.replace('.html', '').replace('.HTML', '');
+                
+                // 提取作者信息
+                let author = "未知作者";
+                const authorPatterns = [
+                    /作者[：:]\s*([^\n\r<]+)/i,
+                    /制作者[：:]\s*([^\n\r<]+)/i,
+                    /制作者[：:]\s*([^\n\r<]+)/i
+                ];
+                
+                authorPatterns.forEach(pattern => {
+                    const match = content.match(pattern);
+                    if (match) {
+                        author = match[1].trim();
+                    }
+                });
+                
+                // 自动判断分类
+                let category = "九年级下册";
+                if (title.includes('七年级上册')) category = "七年级上册";
+                else if (title.includes('七年级下册')) category = "七年级下册";
+                else if (title.includes('八年级上册')) category = "八年级上册";
+                else if (title.includes('八年级下册')) category = "八年级下册";
+                else if (title.includes('九年级上册')) category = "九年级上册";
+                else if (title.includes('九年级下册')) category = "九年级下册";
+                else if (title.includes('中考复习')) category = "中考复习";
+                
+                return {
+                    title: title,
+                    author: author,
+                    category: category
+                };
+                
+            } catch (error) {
+                console.error('解析HTML内容时出错:', error);
+                return {
+                    title: filename.replace('.html', '').replace('.HTML', ''),
+                    author: "未知作者",
+                    category: "九年级下册"
+                };
+            }
+        }
+
+        // 文件输入变化事件
+        fileInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                handleFileUpload(files);
+            }
+            // 清空输入，允许重复上传同一文件
+            e.target.value = '';
         });
 
         // 初始化
